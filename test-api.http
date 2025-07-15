@@ -1,0 +1,187 @@
+
+
+### Access Token from Keycloak
+POST http://localhost:8080/realms/Posts/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id=posts-rest-api&username=user_2&password=1234
+
+
+######### Token ##########
+### call Api with Token
+
+
+### user 1
+
+
+GET http://localhost:8081/api/v1/demo/hello-2
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpb0ZXTm15eTdtX1VMVTZzNm81M19aLWtNaWFWaWtWSlhKeVJFTGxWYndNIn0.eyJleHAiOjE3NTI1NzQ3MDQsImlhdCI6MTc1MjU3NDQwNCwianRpIjoiOThlMjY0YzMtNzg4ZC00OWJiLTk5YmQtN2NkYjdjMWNjYjU0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9Qb3N0cyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiYWE4ZWIzYi1iZTIyLTQxZTEtOWY0Yi1lZDc1M2ViZmYxZjAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwb3N0cy1yZXN0LWFwaSIsInNlc3Npb25fc3RhdGUiOiJmMDYzZDU2My0yNWFlLTRlYmUtYTM3MC01YmYzZTQ2ZmRmM2MiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLXBvc3RzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicG9zdHMtcmVzdC1hcGkiOnsicm9sZXMiOlsiY2xpZW50X3VzZXIiLCJjbGllbnRfYWRtaW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImYwNjNkNTYzLTI1YWUtNGViZS1hMzcwLTViZjNlNDZmZGYzYyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6InVzZXIgXzEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyXzEiLCJnaXZlbl9uYW1lIjoidXNlciIsImZhbWlseV9uYW1lIjoiXzEiLCJlbWFpbCI6InVzZXJfMUBlbWFpbC5jb20ifQ.POOJoU0SRdBdXg-YKpR-jLPXQ4muyNZhVvlVKfkeQYMuR6Jk21PMZ1oyARmJHocfIBcs4AP9UKLhBpt65TUtN53nd0eg7_-Ydpy2JhljLCYRh8RESw14VBG86Ve7IoGraQhzroOtSLvc6TTkVV1rICGRVLHkxlPk-dgIzvlL5EZrGXkSwN9txJoAs-ToMYzh2aPAzMj5sHCr2u9r0PNjxOHa63P3rBfI_vfmDK9CS7T8R9JgXGtbUSXalDIU44lZ_2Lc8ltYkBBH2LIr4Sy1JaZ5M1XhVx0wetdQpzXJeeFBUjHJB6L5gXiRviJlNAxbP-P4plkz1QiNrAucFqVPlw
+
+
+### 
+GET http://localhost:8081/api/v1/demo
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpb0ZXTm15eTdtX1VMVTZzNm81M19aLWtNaWFWaWtWSlhKeVJFTGxWYndNIn0.eyJleHAiOjE3NTI1NzQ3MDQsImlhdCI6MTc1MjU3NDQwNCwianRpIjoiOThlMjY0YzMtNzg4ZC00OWJiLTk5YmQtN2NkYjdjMWNjYjU0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9Qb3N0cyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJiYWE4ZWIzYi1iZTIyLTQxZTEtOWY0Yi1lZDc1M2ViZmYxZjAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwb3N0cy1yZXN0LWFwaSIsInNlc3Npb25fc3RhdGUiOiJmMDYzZDU2My0yNWFlLTRlYmUtYTM3MC01YmYzZTQ2ZmRmM2MiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLXBvc3RzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicG9zdHMtcmVzdC1hcGkiOnsicm9sZXMiOlsiY2xpZW50X3VzZXIiLCJjbGllbnRfYWRtaW4iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImYwNjNkNTYzLTI1YWUtNGViZS1hMzcwLTViZjNlNDZmZGYzYyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6InVzZXIgXzEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyXzEiLCJnaXZlbl9uYW1lIjoidXNlciIsImZhbWlseV9uYW1lIjoiXzEiLCJlbWFpbCI6InVzZXJfMUBlbWFpbC5jb20ifQ.POOJoU0SRdBdXg-YKpR-jLPXQ4muyNZhVvlVKfkeQYMuR6Jk21PMZ1oyARmJHocfIBcs4AP9UKLhBpt65TUtN53nd0eg7_-Ydpy2JhljLCYRh8RESw14VBG86Ve7IoGraQhzroOtSLvc6TTkVV1rICGRVLHkxlPk-dgIzvlL5EZrGXkSwN9txJoAs-ToMYzh2aPAzMj5sHCr2u9r0PNjxOHa63P3rBfI_vfmDK9CS7T8R9JgXGtbUSXalDIU44lZ_2Lc8ltYkBBH2LIr4Sy1JaZ5M1XhVx0wetdQpzXJeeFBUjHJB6L5gXiRviJlNAxbP-P4plkz1QiNrAucFqVPlw
+
+
+
+
+### user 2
+
+GET http://localhost:8081/api/v1/demo/hello-2
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpb0ZXTm15eTdtX1VMVTZzNm81M19aLWtNaWFWaWtWSlhKeVJFTGxWYndNIn0.eyJleHAiOjE3NTI1Nzc0ODksImlhdCI6MTc1MjU3NzE4OSwianRpIjoiZWVhYTgxZTEtYzk5Yy00MzFlLTk4MWItZDE5OTQ1MjJhNTEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9Qb3N0cyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJkYzY0MDc4ZS00OGQzLTRiYzItYWIwMi1mZWRiZTlhOGQzNzMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwb3N0cy1yZXN0LWFwaSIsInNlc3Npb25fc3RhdGUiOiIwZWI3YjdiYy0xZTVmLTRkYmItYTA5My02NTJlOTllYzU2NzIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLXBvc3RzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicG9zdHMtcmVzdC1hcGkiOnsicm9sZXMiOlsiY2xpZW50X3VzZXIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjBlYjdiN2JjLTFlNWYtNGRiYi1hMDkzLTY1MmU5OWVjNTY3MiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6InVzZXIgXzIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyXzIiLCJnaXZlbl9uYW1lIjoidXNlciIsImZhbWlseV9uYW1lIjoiXzIiLCJlbWFpbCI6InVzZXJfMkBlbWFpbC5jb20ifQ.DCE1q5bkAoeOBDG2ukZR77J69SBb-Ruo336fzuTFU9FXA7skXbXBaEU4pS9TBDeL9zL2oRKOynEYWEsrKqKjO6Wz023kmLnkkHTR-hOqiNAO0XKf1pSMj2ZOYDJ4Smjgkq29tAP-lb-bwaUO7AXIpgVdwKzvKYIQU_KiUiDTvz1HDkiEHT3vncXL4cmSw1ti5WMraud301z0e-TPJhORPpTtgDkRA5PSzCuvpkuhkTp2oFR0peR_XZxxQ1IAcWRAoa2nfjm7GpgZ6s4L0MO4RKFF3ZbLMt7OJ9DcxZwqv1kFg9iw71r3la7uTs5AukKFu-z3dN8HZQ4vQoodo4ob9Q
+
+
+
+### 
+GET http://localhost:8081/api/v1/demo
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpb0ZXTm15eTdtX1VMVTZzNm81M19aLWtNaWFWaWtWSlhKeVJFTGxWYndNIn0.eyJleHAiOjE3NTI1Nzc0ODksImlhdCI6MTc1MjU3NzE4OSwianRpIjoiZWVhYTgxZTEtYzk5Yy00MzFlLTk4MWItZDE5OTQ1MjJhNTEzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9Qb3N0cyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJkYzY0MDc4ZS00OGQzLTRiYzItYWIwMi1mZWRiZTlhOGQzNzMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwb3N0cy1yZXN0LWFwaSIsInNlc3Npb25fc3RhdGUiOiIwZWI3YjdiYy0xZTVmLTRkYmItYTA5My02NTJlOTllYzU2NzIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLXBvc3RzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicG9zdHMtcmVzdC1hcGkiOnsicm9sZXMiOlsiY2xpZW50X3VzZXIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjBlYjdiN2JjLTFlNWYtNGRiYi1hMDkzLTY1MmU5OWVjNTY3MiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6InVzZXIgXzIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyXzIiLCJnaXZlbl9uYW1lIjoidXNlciIsImZhbWlseV9uYW1lIjoiXzIiLCJlbWFpbCI6InVzZXJfMkBlbWFpbC5jb20ifQ.DCE1q5bkAoeOBDG2ukZR77J69SBb-Ruo336fzuTFU9FXA7skXbXBaEU4pS9TBDeL9zL2oRKOynEYWEsrKqKjO6Wz023kmLnkkHTR-hOqiNAO0XKf1pSMj2ZOYDJ4Smjgkq29tAP-lb-bwaUO7AXIpgVdwKzvKYIQU_KiUiDTvz1HDkiEHT3vncXL4cmSw1ti5WMraud301z0e-TPJhORPpTtgDkRA5PSzCuvpkuhkTp2oFR0peR_XZxxQ1IAcWRAoa2nfjm7GpgZ6s4L0MO4RKFF3ZbLMt7OJ9DcxZwqv1kFg9iw71r3la7uTs5AukKFu-z3dN8HZQ4vQoodo4ob9Q
+
+
+
+
+################ Get all ################ 
+
+### comments
+
+GET http://localhost:8081/api/comments
+
+
+### comments of Post
+
+GET http://localhost:8081/api/comments/32ac419d-46f2-45b0-b227-bca4dc2b8a42
+
+
+### posts
+GET http://localhost:8081/api/posts
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpb0ZXTm15eTdtX1VMVTZzNm81M19aLWtNaWFWaWtWSlhKeVJFTGxWYndNIn0.eyJleHAiOjE3NTI1OTY2ODEsImlhdCI6MTc1MjU5NjM4MSwianRpIjoiNmRjODk3YjgtODc2OC00NTY2LTkwNTMtMjYzYzc1ZGMyMDdhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9Qb3N0cyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJkYzY0MDc4ZS00OGQzLTRiYzItYWIwMi1mZWRiZTlhOGQzNzMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwb3N0cy1yZXN0LWFwaSIsInNlc3Npb25fc3RhdGUiOiI3NGEwNGRiOS1iZjcwLTRkZTMtYTM2OS0yOTdiNGRhYjJjMDgiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLXBvc3RzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicG9zdHMtcmVzdC1hcGkiOnsicm9sZXMiOlsiY2xpZW50X3VzZXIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6Ijc0YTA0ZGI5LWJmNzAtNGRlMy1hMzY5LTI5N2I0ZGFiMmMwOCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6InVzZXIgXzIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyXzIiLCJnaXZlbl9uYW1lIjoidXNlciIsImZhbWlseV9uYW1lIjoiXzIiLCJlbWFpbCI6InVzZXJfMkBlbWFpbC5jb20ifQ.dKsKozRJRXk5UUBWpEkMo7AaRdzBYcbXGlLC8Mqn9xu-Od-fqTbyq6y2RbWpTVIF51EkrHDJnQQulUnlliVfXqapz5sFjaXH1fRURi0ZkHwPKfn11hXdAPbv8RwjK9_38IegMJANmmCHEufHyRgPCwFTRg2D-bg7-8hSdgVKnoG-mZvCol33nrV02c5dLIgh_9o1gvdWsbR4c28Ok6gOipGdG6aFfDymkVj4yq86D7T8Wqkq_ROS6o3DLryV6lZ0CUhSJXCb1Bk1n_mc3yf7Mf4rj2EFHkA8hwkWzqtIs_OAEkpdasvEOHncdfkHfykGIue8dhaZxaX0FRQCVyfLsg
+
+
+### User posts
+GET http://localhost:8081/api/posts/451cb4ad-6307-4097-90db-a3b934e319d8
+
+### reacts
+GET http://localhost:8081/api/reacts
+
+
+
+### reacts of Post
+GET http://localhost:8081/api/reacts/32ac419d-46f2-45b0-b227-bca4dc2b8a42
+
+
+### reports
+GET http://localhost:8081/api/reports
+
+
+### saveForLaters
+GET http://localhost:8081/api/saveForLaters
+
+### User SaveForLaters Posts
+GET http://localhost:8081/api/saveForLaters/47808478-542f-4c2b-bd31-d252bc9e1c9f
+
+### users
+GET http://localhost:8081/api/users
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpb0ZXTm15eTdtX1VMVTZzNm81M19aLWtNaWFWaWtWSlhKeVJFTGxWYndNIn0.eyJleHAiOjE3NTI1OTY0NzUsImlhdCI6MTc1MjU5NjE3NSwianRpIjoiZTdmY2YzNmMtMmJmYS00NmM4LTk3YjMtYTYyODA4ZmY2YzA3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9Qb3N0cyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJkYzY0MDc4ZS00OGQzLTRiYzItYWIwMi1mZWRiZTlhOGQzNzMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwb3N0cy1yZXN0LWFwaSIsInNlc3Npb25fc3RhdGUiOiI3YWRjMGZhMi1iOWZjLTQ3MDUtYTU5MS0wMmViMDA0YmE4Y2YiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLXBvc3RzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicG9zdHMtcmVzdC1hcGkiOnsicm9sZXMiOlsiY2xpZW50X3VzZXIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjdhZGMwZmEyLWI5ZmMtNDcwNS1hNTkxLTAyZWIwMDRiYThjZiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6InVzZXIgXzIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyXzIiLCJnaXZlbl9uYW1lIjoidXNlciIsImZhbWlseV9uYW1lIjoiXzIiLCJlbWFpbCI6InVzZXJfMkBlbWFpbC5jb20ifQ.FFPZwiUj5wraxKVTfe501yb-ZLNyi18bNDPnhLZlFwkcQ7NIb_DkwGk0LUkTEvo4kWxBOpnuUc8grgGMF-QfDv21-waZQXv0TkTdOvyRNiJqrsgJXCguNEHjhOW9t6-ipLXLNlZd3cxLfQZwN7Scdov2aXQNsSYHoqoyzeZ7Za-H3KOk-62kNIGmypxuP_Z2dgk2Iopaeg4mIBJpPVLIvuqv-OGTFfvsEwQVTN2GQKLk8peK3rEjIP9bYAV1KYdD5k5q9ptwRuvOnFrQ-YW8Rz8D6_AecFK_JGwME8xJiw_g1pY2AEsDmEZWFPcS0_uSyW3N326rAtXAljq6FBHbbQ
+
+
+
+###############################################################
+
+################ Create ################ 
+
+POST http://localhost:8081/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJpb0ZXTm15eTdtX1VMVTZzNm81M19aLWtNaWFWaWtWSlhKeVJFTGxWYndNIn0.eyJleHAiOjE3NTI1OTY4MTIsImlhdCI6MTc1MjU5NjUxMiwianRpIjoiYmI5OTE2OTItYjEyZi00YmNkLThhYjYtOTNjMDUyNDU3ODg4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9Qb3N0cyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJkYzY0MDc4ZS00OGQzLTRiYzItYWIwMi1mZWRiZTlhOGQzNzMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwb3N0cy1yZXN0LWFwaSIsInNlc3Npb25fc3RhdGUiOiIzZTAwNzgyZi1jMDE5LTQ4ODktOTg2Zi01YjBjM2RjYjdmYTYiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLXBvc3RzIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicG9zdHMtcmVzdC1hcGkiOnsicm9sZXMiOlsiY2xpZW50X3VzZXIiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjNlMDA3ODJmLWMwMTktNDg4OS05ODZmLTViMGMzZGNiN2ZhNiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6InVzZXIgXzIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ1c2VyXzIiLCJnaXZlbl9uYW1lIjoidXNlciIsImZhbWlseV9uYW1lIjoiXzIiLCJlbWFpbCI6InVzZXJfMkBlbWFpbC5jb20ifQ.nhoR_xUjA3hFzjinmwd9VGuMovY8kQT6sryC3rF96CD2SB71wFgvE2d5Pe5w_k2p9Ye9rAejpv3ST3Daj1M6bzMS2XAQiJidrlCYbP5ucKXW_x9HDi3DKA99AFq9Ve-ukHPjRzLYppcuQwVNXAxbpQD4rbbZUTLRJ6frQxhRQtyu9RPgIp5pSU--3jHkPqsrsutkdsSHL-ESXkM5Qy1e3nbwRlbT76WZWnIXF852Sej0RZiG-0UC7ICOVwIEC0kQ0OHwsQ6tmYEEJOXlwVMF9k8CDLt0PYiBJ3SnS0GYYBPihjz5PIVJXiQFGP38kFhKhPfpIeT2zg7Guad_U9zrXA
+
+{\\$%< >\\$\\$
+  "type": 1 ,
+  "text": "post 11 \\$%<dc64078e-48d3-4bc2-ab02-fedbe9a8d373>\\$\\$ \\$%<baa8eb3b-be22-41e1-9f4b-ed753ebff1f0>\\$\\$ \\$%<dc64078e-4bc2-ab02-fedbe9a8d373>\\$\\$ \\$%<baa8eb3b22-41e1-9f4b-ed753ebff1f0>\\$\\$",
+  "attachments" : [],
+  "isSaved": false,
+  "isShared": false,
+  "sharedPost":null ,
+  "moreData": [],
+  "hashtags": []
+}
+
+
+### Comment
+
+POST http://localhost:8081/api/comments
+Content-Type: application/json
+
+{
+  "post" : {
+    "id": "2c189cb4-954d-419a-97cf-4dc5ae113092"
+  },
+  "parent" : null ,
+  "text" : "Comment 2",
+  "attachments" : [] ,
+  "score" : 4 ,
+  "createdBy":   {
+    "id": "47808478-542f-4c2b-bd31-d252bc9e1c9f"
+  }
+}
+
+
+### Save For Later
+
+POST http://localhost:8081/api/saveForLaters
+Content-Type: application/json
+
+{
+  "post" : {
+    "id": "32ac419d-46f2-45b0-b227-bca4dc2b8a42"
+  },
+  "createdBy":   {
+    "id": "47808478-542f-4c2b-bd31-d252bc9e1c9f"
+  },
+}
+
+
+### React 
+
+POST http://localhost:8081/api/reacts
+Content-Type: application/json
+
+{
+  "type" : 3 ,
+  "post" : {
+    "id": "3aa540d9-c974-4759-911c-caa694d6a305"
+  },
+  "createdBy":   {
+    "id": "47808478-542f-4c2b-bd31-d252bc9e1c9f"
+  }
+}
+
+
+###############################################################
+
+################ Update ################ 
+
+
+###React
+
+Put http://localhost:8081/api/reacts/75fee2db-02ef-4901-8c46-7694e0535194
+Content-Type: application/json
+
+1
+
+
+###Posts
+Put http://localhost:8081/api/posts/2c189cb4-954d-419a-97cf-4dc5ae113092
+Content-Type: application/json
+
+{
+  "type": 3 ,
+  "text": "post 5 updated",
+  "attachments" : [],
+  "isSaved": false,
+  "isShared": false,
+  "sharedPost":null ,
+  "createdBy": {
+    "id": "47808478-542f-4c2b-bd31-d252bc9e1c9f"
+  },
+  "moreData": [],
+  "hashtags": []
+}
+
