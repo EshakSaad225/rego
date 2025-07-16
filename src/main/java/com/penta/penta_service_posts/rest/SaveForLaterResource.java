@@ -38,7 +38,7 @@ public class SaveForLaterResource {
 
     @GetMapping("/{id}")
     public ResponseEntity<List<SaveForLaterDTO>> getUsersSaveForLaterPosts(
-            @PathVariable(name = "id") final UUID id) {
+            @PathVariable(name = "id") final String id) {
         return ResponseEntity.ok(saveForLaterService.getUserSaveForLaterPosts(id));
     }
 

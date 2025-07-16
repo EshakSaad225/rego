@@ -9,5 +9,5 @@ import com.penta.penta_service_posts.domain.SaveForLater;
 
 
 public interface SaveForLaterRepository extends JpaRepository<SaveForLater, UUID> {
-    List<SaveForLater> findByCreatedById(UUID userId);
+    List<SaveForLater> findByCreatedById(String userId);
 }

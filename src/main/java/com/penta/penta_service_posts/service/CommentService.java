@@ -1,13 +1,16 @@
 package com.penta.penta_service_posts.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import com.penta.penta_service_posts.Converter.SpringSecurityAuditorAware;
 import com.penta.penta_service_posts.domain.Comment;
+import com.penta.penta_service_posts.domain.Users;
 import com.penta.penta_service_posts.model.CommentDTO;
 import com.penta.penta_service_posts.repos.CommentRepository;
 import com.penta.penta_service_posts.util.NotFoundException;
@@ -17,12 +20,13 @@ public class CommentService {
     
 
     private final CommentRepository commentRepository;
+    private final SpringSecurityAuditorAware auditorAware;
+    private final PostService postService ;
 
-    @Autowired
-    private PostService postService ;
-
-    public CommentService(final CommentRepository commentRepository) {
+    public CommentService(final CommentRepository commentRepository ,final SpringSecurityAuditorAware auditorAware ,final PostService postService ) {
         this.commentRepository = commentRepository;
+        this.auditorAware = auditorAware ;
+        this.postService = postService ;
     }
 
     public List<CommentDTO> findAll() {
@@ -53,13 +57,27 @@ public class CommentService {
 
     public void update(final UUID id, final CommentDTO commentDTO) {
         final Comment comment = commentRepository.findById(id)
-                .orElseThrow(NotFoundException::new);
-        mapToEntity(commentDTO, comment);
-        commentRepository.save(comment);
+            .orElseThrow(NotFoundException::new);
+        Optional<Users> currentUser = auditorAware.getCurrentAuditor();
+        if(currentUser.isPresent() && comment.getCreatedBy().getId().equals(currentUser.get().getId())){
+            mapToEntity(commentDTO, comment);
+            commentRepository.save(comment);
+        }
+        else {
+            throw new AccessDeniedException("You are not allowed to update this Comment.");
+        }  
     }
 
     public void delete(final UUID id) {
-        commentRepository.deleteById(id);
+        final Comment comment = commentRepository.findById(id)
+            .orElseThrow(NotFoundException::new);
+        Optional<Users> currentUser = auditorAware.getCurrentAuditor();
+        if(currentUser.isPresent() && comment.getCreatedBy().getId().equals(currentUser.get().getId())){
+            commentRepository.deleteById(id);
+        }
+        else {
+            throw new AccessDeniedException("You are not allowed to Delete this Comment.");
+        }
     }
 
     private CommentDTO mapToDTO(final Comment comment, final CommentDTO commentDTO) {
@@ -82,7 +100,6 @@ public class CommentService {
         comment.setText(commentDTO.getText());
         comment.setAttachments(commentDTO.getAttachments());
         comment.setScore(commentDTO.getScore());
-        comment.setCreatedBy(commentDTO.getCreatedBy());
         comment.setMentions(postService.getMentionsFromText(commentDTO.getText()));
         return comment;
     }

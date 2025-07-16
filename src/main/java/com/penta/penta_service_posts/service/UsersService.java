@@ -1,7 +1,6 @@
 package com.penta.penta_service_posts.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class UsersService {
                 .toList();
     }
 
-    public UsersDTO get(final UUID id) {
+    public UsersDTO get(final String id) {
         return usersRepository.findById(id)
                 .map(users -> mapToDTO(users, new UsersDTO()))
                 .orElseThrow(NotFoundException::new);

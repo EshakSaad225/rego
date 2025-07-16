@@ -1,7 +1,5 @@
 package com.penta.penta_service_posts.config;
 
-import java.util.UUID;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;

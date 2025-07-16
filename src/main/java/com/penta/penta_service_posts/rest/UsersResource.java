@@ -1,7 +1,6 @@
 package com.penta.penta_service_posts.rest;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,7 @@ public class UsersResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsersDTO> getUsers(@PathVariable(name = "id") final UUID id) {
+    public ResponseEntity<UsersDTO> getUsers(@PathVariable(name = "id") final String id) {
         return ResponseEntity.ok(usersService.get(id));
     }
 

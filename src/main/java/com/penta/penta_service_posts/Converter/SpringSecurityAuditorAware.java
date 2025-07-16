@@ -1,7 +1,6 @@
 package com.penta.penta_service_posts.Converter;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
@@ -21,7 +20,7 @@ public class SpringSecurityAuditorAware implements AuditorAware<Users> {
         if (auth instanceof JwtAuthenticationToken jwtAuth && jwtAuth.isAuthenticated()) {
             Jwt jwt = jwtAuth.getToken();
             try {
-                UUID userId = UUID.fromString(jwt.getClaim("sub"));
+                String userId = jwt.getClaim("sub");
                 String username = jwt.getClaim("preferred_username");
                 Users user = new Users(userId, username);
                 return Optional.of(user);

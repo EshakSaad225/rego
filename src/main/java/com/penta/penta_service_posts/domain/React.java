@@ -3,11 +3,14 @@ package com.penta.penta_service_posts.domain;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.penta.penta_service_posts.enums.ReactType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
@@ -23,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Data 
 @AllArgsConstructor 
 @NoArgsConstructor 
+@EntityListeners(AuditingEntityListener.class)
 public class React {
 
     @Id
@@ -41,6 +45,7 @@ public class React {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_by")
+    @CreatedBy
     private Users createdBy;
 
 }

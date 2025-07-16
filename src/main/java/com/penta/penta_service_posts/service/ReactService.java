@@ -1,12 +1,16 @@
 package com.penta.penta_service_posts.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import com.penta.penta_service_posts.Converter.SpringSecurityAuditorAware;
 import com.penta.penta_service_posts.domain.React;
+import com.penta.penta_service_posts.domain.Users;
 import com.penta.penta_service_posts.enums.ReactType;
 import com.penta.penta_service_posts.model.ReactDTO;
 import com.penta.penta_service_posts.repos.ReactRepository;
@@ -17,9 +21,11 @@ import com.penta.penta_service_posts.util.NotFoundException;
 public class ReactService {
 
     private final ReactRepository reactRepository;
+    private final SpringSecurityAuditorAware auditorAware;
 
-    public ReactService(final ReactRepository reactRepository) {
+    public ReactService(final ReactRepository reactRepository , final SpringSecurityAuditorAware auditorAware) {
         this.reactRepository = reactRepository;
+        this.auditorAware = auditorAware ;
     }
 
     public List<ReactDTO> findAll() {
@@ -50,13 +56,30 @@ public class ReactService {
 
     public void update(final UUID id, final ReactType type ) {
         final React react = reactRepository.findById(id)
-                .orElseThrow(NotFoundException::new);
-        react.setType(type);
-        reactRepository.save(react);
+            .orElseThrow(NotFoundException::new);
+        Optional<Users> currentUser = auditorAware.getCurrentAuditor();
+        if(currentUser.isPresent() && react.getCreatedBy().getId().equals(currentUser.get().getId())){
+            react.setType(type);
+            reactRepository.save(react);
+        }
+        else {
+            throw new AccessDeniedException("You are not allowed to update this React.");
+        }
     }
 
     public void delete(final UUID id) {
-        reactRepository.deleteById(id);
+        final React react = reactRepository.findById(id)
+            .orElseThrow(NotFoundException::new);
+        Optional<Users> currentUser = auditorAware.getCurrentAuditor();
+        System.out.println(currentUser.isPresent() && react.getCreatedBy().getId().equals(currentUser.get().getId()));
+        System.out.println(currentUser.isPresent());
+        System.out.println(react.getCreatedBy().getId().equals(currentUser.get().getId()));
+        if(currentUser.isPresent() && react.getCreatedBy().getId().equals(currentUser.get().getId())){
+            reactRepository.deleteById(id);
+        }
+        else {
+            throw new AccessDeniedException("You are not allowed to Delete this React.");
+        }
     }
 
     private ReactDTO mapToDTO(final React react, final ReactDTO reactDTO) {
@@ -70,7 +93,6 @@ public class ReactService {
     private React mapToEntity(final ReactDTO reactDTO, final React react) {
         react.setType(reactDTO.getType());
         react.setPost(reactDTO.getPost());
-        react.setCreatedBy(reactDTO.getCreatedBy());
         return react;
     }
 

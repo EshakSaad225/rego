@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -39,7 +40,7 @@ public class Comment {
     private UUID id;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "post_id" , updatable = false)
     private Post post;
 
     @ManyToOne(fetch=FetchType.EAGER)
@@ -58,6 +59,7 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "created_by")
+    @CreatedBy
     private Users createdBy;
 
     @CreatedDate

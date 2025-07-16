@@ -39,7 +39,7 @@ public class PostResource {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<PostDTO>> getUserPosts(@PathVariable(name = "id") final UUID id) {
+    public ResponseEntity<List<PostDTO>> getUserPosts(@PathVariable(name = "id") final String id) {
         return ResponseEntity.ok(postService.getUserPosts(id));
     }
 

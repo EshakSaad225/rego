@@ -1,5 +1,6 @@
 package com.penta.penta_service_posts.service;
 
+import org.springframework.security.access.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import java.util.regex.Pattern;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.penta.penta_service_posts.Converter.SpringSecurityAuditorAware;
 import com.penta.penta_service_posts.domain.Post;
 import com.penta.penta_service_posts.domain.Users;
 import com.penta.penta_service_posts.model.PostDTO;
@@ -22,28 +24,34 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UsersRepository usersRepository;
+    private final SpringSecurityAuditorAware auditorAware;
 
-    public PostService(PostRepository postRepository, UsersRepository usersRepository) {
+    public PostService(final PostRepository postRepository,final UsersRepository usersRepository ,final SpringSecurityAuditorAware auditorAware) {
         this.postRepository = postRepository;
         this.usersRepository = usersRepository;
+        this.auditorAware = auditorAware ;
     }
 
+    @SuppressWarnings("empty-statement")
     public List<Users> getMentionsFromText(String text){ 
 
-        // "\\$%<111111>\\$\\$<usname>
+        // %!@#<UserId>#@!%
 
-      String regex = "\\$%<(.*?)>\\$\\$";
+      String regex = "%!@#<(.{36})>#@!%";
       Pattern pattern = Pattern.compile(regex);
       Matcher matcher = pattern.matcher(text);
-      List<UUID> usersId =  new ArrayList <> () ;
+      List<String> usersId =  new ArrayList <> () ;
 
       while (matcher.find()) {
         System.out.println("dlkwjdslpsiwjpld"+matcher.group(1));
-        usersId.add(UUID.fromString(matcher.group(1))) ;
+        usersId.add(matcher.group(1)) ;
       }
-      List<Users> usres = usersRepository.findByIdIn(usersId);
-      System.out.println(usres);
-    return usres ;
+      if(!usersId.isEmpty()){
+        List<Users> usres = usersRepository.findByIdIn(usersId);
+        System.out.println(usres);
+        return usres ;
+      }
+      return new ArrayList<>();
   }
 
     public List<PostDTO> findAll() {
@@ -53,7 +61,7 @@ public class PostService {
                 .toList();
     }
 
-    public List<PostDTO> getUserPosts(UUID userId) {
+    public List<PostDTO> getUserPosts(String userId) {
         final List<Post> posts = postRepository.findByCreatedById(userId);
         return posts.stream()
                 .map(post -> mapToDTO(post, new PostDTO()))
@@ -63,20 +71,32 @@ public class PostService {
     public UUID create(final PostDTO postDTO) {
         final Post post = new Post();
         mapToEntity(postDTO, post);
-        
-
         return postRepository.save(post).getId();
     }
 
     public void update(final UUID id, final PostDTO postDTO) {
         final Post post = postRepository.findById(id)
-                .orElseThrow(NotFoundException::new);
-        mapToEntity(postDTO, post);
-        postRepository.save(post);
+            .orElseThrow(NotFoundException::new);
+        Optional<Users> currentUser = auditorAware.getCurrentAuditor();
+        if(currentUser.isPresent() && post.getCreatedBy().getId().equals(currentUser.get().getId())){
+            mapToEntity(postDTO, post);
+            postRepository.save(post);
+        }
+        else {
+            throw new AccessDeniedException("You are not allowed to update this post.");
+        }
     }
 
     public void delete(final UUID id) {
-        postRepository.deleteById(id);
+        final Post post = postRepository.findById(id)
+            .orElseThrow(NotFoundException::new);
+        Optional<Users> currentUser = auditorAware.getCurrentAuditor();
+        if(currentUser.isPresent() && post.getCreatedBy().getId().equals(currentUser.get().getId())){
+            postRepository.deleteById(id);
+        }
+        else {
+            throw new AccessDeniedException("You are not allowed to Delete this post.");
+        }
     }
 
     private PostDTO mapToDTO(final Post post, final PostDTO postDTO) {
@@ -104,7 +124,6 @@ public class PostService {
         post.setIsSaved(postDTO.getIsSaved());
         post.setIsShared(postDTO.getIsShared());
         post.setSharedPost(postDTO.getSharedPost());
-        post.setCreatedBy(postDTO.getCreatedBy());
         post.setMoreData(postDTO.getMoreData());
         post.setMentions(getMentionsFromText( postDTO.getText()));
         post.setHashtags(postDTO.getHashtags());
