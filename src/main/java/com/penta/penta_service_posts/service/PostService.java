@@ -1,6 +1,5 @@
 package com.penta.penta_service_posts.service;
 
-import org.springframework.security.access.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import com.penta.penta_service_posts.Converter.SpringSecurityAuditorAware;
@@ -32,7 +32,6 @@ public class PostService {
         this.auditorAware = auditorAware ;
     }
 
-    @SuppressWarnings("empty-statement")
     public List<Users> getMentionsFromText(String text){ 
 
         // %!@#<UserId>#@!%
@@ -43,13 +42,28 @@ public class PostService {
       List<String> usersId =  new ArrayList <> () ;
 
       while (matcher.find()) {
-        System.out.println("dlkwjdslpsiwjpld"+matcher.group(1));
         usersId.add(matcher.group(1)) ;
       }
       if(!usersId.isEmpty()){
         List<Users> usres = usersRepository.findByIdIn(usersId);
         System.out.println(usres);
         return usres ;
+      }
+      return new ArrayList<>();
+  }
+
+    public List<String> getHashtagsFromText(String text){ 
+
+      String regex = "(#[^\\s]+)";
+      Pattern pattern = Pattern.compile(regex);
+      Matcher matcher = pattern.matcher(text);
+      List<String> hashtags =  new ArrayList <> () ;
+
+      while (matcher.find()) {
+        hashtags.add(matcher.group(1)) ;
+      }
+      if(!hashtags.isEmpty()){
+        return hashtags ;
       }
       return new ArrayList<>();
   }
@@ -125,8 +139,8 @@ public class PostService {
         post.setIsShared(postDTO.getIsShared());
         post.setSharedPost(postDTO.getSharedPost());
         post.setMoreData(postDTO.getMoreData());
-        post.setMentions(getMentionsFromText( postDTO.getText()));
-        post.setHashtags(postDTO.getHashtags());
+        post.setMentions(getMentionsFromText(postDTO.getText()));
+        post.setHashtags(getHashtagsFromText(postDTO.getText()));
         return post;
     }
 

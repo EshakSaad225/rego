@@ -35,6 +35,7 @@ public class UsersService {
     private UsersDTO mapToDTO(final Users users, final UsersDTO usersDTO) {
         usersDTO.setId(users.getId());
         usersDTO.setUsername(users.getUsername());
+        usersDTO.setUserAttribute(users.getUserAttribute());
         return usersDTO;
     }
 

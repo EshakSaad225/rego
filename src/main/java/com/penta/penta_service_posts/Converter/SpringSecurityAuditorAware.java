@@ -22,7 +22,7 @@ public class SpringSecurityAuditorAware implements AuditorAware<Users> {
             try {
                 String userId = jwt.getClaim("sub");
                 String username = jwt.getClaim("preferred_username");
-                Users user = new Users(userId, username);
+                Users user = new Users(userId, username,null);
                 return Optional.of(user);
             } catch (Exception e) {
                 return Optional.empty();
